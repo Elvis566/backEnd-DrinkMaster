@@ -3,35 +3,41 @@ import { GameModel } from '../model/GameModel.js';
 import {PlayersModel } from '../model/PlayersModel..js'
 import { UserModel } from '../model/UserModel.js';
 
-export const create = async(req, res)=> {
-   try {
-    const {user_id, codigo } = req.body;
-    const score = 0;
+export const create = async (req, res) => {
+    try {
+        const { user_id, codigo } = req.body;
+        const score = 0;
 
-    if(!user_id || !codigo){
-        res.status(401).json({message: 'Not input invalid'})
-    }
+        // Verificación de los datos de entrada
+        if (!user_id || !codigo) {
+            return res.status(401).json({ message: 'Input invalid' });
+        }
 
-    const sala = await GameModel.findAll({
-        where:{invite_code:codigo}
-    });
+        // Buscar la sala con el código de invitación proporcionado
+        const sala = await GameModel.findAll({
+            where: { invite_code: codigo }
+        });
 
+        // Verificación si existe la sala
+        if (sala.length === 0) {
+            return res.status(401).json({ message: 'Invalid code' });
+        }
+
+        // Crear un nuevo jugador en la sala encontrada
         const player = await PlayersModel.create({
             score: score,
             user_id: user_id,
-            game_id: sala.id
-        })
-    
-        res.status(200).json({player: player})
+            game_id: sala[0].id // Acceder al primer elemento del array
+        });
 
-    res.status(401).json({message: 'Invalid code'})
+        // Responder con el jugador creado
+        return res.status(200).json({ player: player });
 
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+};
 
- 
-   } catch (error) {
-    return res.status(500).json({message:error})
-   }
-}
  
 export const getPlayers = async(req, res)=>{
     try {
