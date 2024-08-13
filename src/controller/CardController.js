@@ -4,7 +4,7 @@ import { CardModel } from '../model/CardModel.js'
 export const saveCard = async (req, res)=>{
 
     const { name, type_game_id} = req.body;
-    const url = `http://backend-drinkmaster-production.up.railway.app/images/cards${req.file.filename}`
+    const url = `https://backend-drinkmaster-production.up.railway.app/images/cards${req.file.filename}`
 
     try {
         if(!name || !type_game_id ){

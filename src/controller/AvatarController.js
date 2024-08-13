@@ -3,7 +3,7 @@ import { AvatarModel } from '../model/AvatarModel.js'
 
 export const saveAvatar = async (req, res)=>{
     const name = req.body.name;
-    const url = `http://backend-drinkmaster-production.up.railway.app/images/${req.file.filename}`
+    const url = `https://backend-drinkmaster-production.up.railway.app/images/${req.file.filename}`
     try {
         if(!name){
             return res.status(400).json({messge: "not input invalid"})
