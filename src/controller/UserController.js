@@ -75,7 +75,7 @@ export const login = async (req,res)=> {
             return res.status(404).json({message:"the email does not exist"});
         }
     
-        const isPassworValid = await bcrypt.compare(password, verfiEmail.password);
+        const isPassworValid = await bcryptjs.compare(password, verfiEmail.password);
         
         if (!isPassworValid) {
             return res.status(401).json({message:"Invalid Password"}); 
