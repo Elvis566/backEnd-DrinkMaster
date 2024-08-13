@@ -5,31 +5,31 @@ import { UserModel } from '../model/UserModel.js';
 
 export const create = async(req, res)=> {
    try {
-    const {user_id, game_id, codigo } = req.body;
+    const {user_id, codigo } = req.body;
     const score = 0;
 
-    if(!user_id || !game_id || !codigo){
+    if(!user_id || !codigo){
         res.status(401).json({message: 'Not input invalid'})
     }
 
-    const sala = await GameModel.findByPk(game_id);
+    const sala = await GameModel.findAll({
+        where:{invite_code:codigo}
+    });
 
-    if(codigo == sala.invite_code){
         const player = await PlayersModel.create({
             score: score,
             user_id: user_id,
-            game_id: game_id
+            game_id: sala.id
         })
     
         res.status(200).json({player: player})
-    }
 
     res.status(401).json({message: 'Invalid code'})
 
 
  
    } catch (error) {
-    
+    return res.status(500).json({message:error})
    }
 }
  
