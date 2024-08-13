@@ -1,5 +1,5 @@
 import { UserModel } from "../model/UserModel.js";
-import bcrypt from "bcrypt";
+import bcryptjs from "bcryptjs";
 import fs from 'node:fs'
 import { Op } from "sequelize";
 import { AvatarModel } from "../model/AvatarModel.js";
@@ -18,7 +18,7 @@ export const saveUser = async (req, res)=>{
         if(verfiEmail) {
             return res.status(401).json({message:" email is already exist"})
         }
-        const encryptedPassword = await bcrypt.hash(password.toString(),10);
+        const encryptedPassword = await bcryptjs.hash(password.toString(),10);
         const user =await UserModel.create({
             apodo,
             email,
