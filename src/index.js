@@ -29,7 +29,7 @@ app.use('/images', express.static(path.join(__dirname, 'src/images')));
 
 // Configurar CORS para permitir solicitudes desde localhost:8100
 app.use(cors({
-    origin: 'http://localhost:8100',
+    origin: 'https://frontend-drinkmaster.web.app/',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
   }));
