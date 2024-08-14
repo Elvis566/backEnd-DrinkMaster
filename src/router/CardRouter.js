@@ -19,6 +19,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.post('/save', upload.single('card'), saveCard);
-router.get('/obtener', getCardPlay);
+router.get('/obtener/:id', getCardPlay);
 
 export const routerCard = router;
