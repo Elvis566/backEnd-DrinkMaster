@@ -29,10 +29,13 @@ export const saveCard = async (req, res)=>{
 }
 
 export const getCardPlay = async(req, res)=>{
+    const id = req.params.id
     try {
         // const suerte = Math.floor(Math.random() * 52);
 
-        const carta = await CardModel.findAll()
+        const carta = await CardModel.findAll({
+            where:{type_game_id: id}
+        })
 
         if(!carta){
            return res.status(401).json({message: 'Not foud'});
