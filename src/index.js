@@ -53,7 +53,7 @@ app.use('/sugerencia', routerSugerencias);
 const conexion = async ()=>{
     try {
         await sequelize.authenticate();
-        await sequelize.sync({force:false});
+        await sequelize.sync({force:true});
         console.log('Connection has beenestablishe successfully');
         app.listen(port, () =>{
             console.log(`Server running http://localhost:${port}`);
