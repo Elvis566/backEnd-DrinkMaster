@@ -75,7 +75,7 @@ io.on('connection', (socket) => {
 const conexion = async () => {
   try {
     await sequelize.authenticate();
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ force: false });
     console.log('Connection has been established successfully');
     app.listen(port, () => { // Cambiado de app.listen a server.listen
       console.log(`Server running at http://localhost:${port}`);
