@@ -33,7 +33,7 @@ export const getPenitenciaPlay = async(req, res)=>{
             where: {card_id:id}
         })
         if(penitencia){
-           return res.status(401).json({penitencia: penitencia[0]});
+           return res.status(200).json({penitencia: penitencia[0]});
         }
         return res.status(401).json({message: 'Not foud '})
         
