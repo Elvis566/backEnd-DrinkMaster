@@ -4,7 +4,7 @@ import { Router } from 'express';
 const router = Router();
 
 router.post('/create', create);
-router.put('/update', update);
+router.put('/update:id', update);
 router.get('/obtener/:id', getPlayers);
 router.get('/obtenerNotCP/:id',getPlayersNotCreateP )
 

@@ -41,3 +41,21 @@ export const getTypeGame = async(req, res)=> {
         
     }
 }
+
+export const getTypeGameId = async(req, res)=> {
+    try {
+        const id = req.params.id
+        
+        const gameT = await TypeGameModel.findByPk(id);
+        if(!gameT){
+
+            return res.status(401).json({message: 'Not found'})
+        }
+
+        return res.status(200).json({gameT: gameT})
+    } catch (error) {
+
+    return res.status(500).json({message: error})
+        
+    }
+}

@@ -70,7 +70,7 @@ export const finalyGame = async(req, res)=> {
     if(!fGame){
         return res.status(401).json({message: 'Not found'});
     }else{
-        fGame.set({status: false});
+        fGame.set({status: 'ended'});
         fGame.save();
         return res.status(200).json({message:'Finaly game'})
     }

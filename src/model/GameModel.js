@@ -12,6 +12,18 @@ export const GameModel = sequelize.define("games", {
     type: DataTypes.STRING,
     allowNull: false
   },
+  btnPrecios: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: true,
+  }, 
+  cardJugada: {
+    type: DataTypes.STRING,
+    allowNull: true
+  }, 
+  penitenciaJugada: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
   status: {
     type: DataTypes.ENUM('waiting', 'started', 'ended'),
     defaultValue: 'waiting',
