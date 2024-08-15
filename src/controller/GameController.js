@@ -29,7 +29,7 @@ export const createGame = async(req, res)=>{
 export const updateGame = async(req, res)=>{
     try {
         const id = req.params.id;
-        const {pcardJugada, enitenciaJugada} = req.body
+        const {cardJugada, penitenciaJugada} = req.body
 
         const encontrado = await GameModel.findByPk(id)
 
