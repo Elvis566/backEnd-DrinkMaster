@@ -58,6 +58,7 @@ export const getPlayers = async(req, res)=>{
 
         const dataPlayers = players.map(result =>({
             id: result.id,
+            score: result.score,
             user_id: result.enlaceU.id,
             apodo: result.enlaceU.apodo,
             avatar: result.enlaceU.enlaceA.url
