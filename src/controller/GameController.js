@@ -91,7 +91,8 @@ export const startGame = async (req, res) => {
             return res.status(404).json({ message: 'Game not found' });
         }
 
-        await game.update({ status: 'started' }); // Actualiza el estado del juego a 'started'
+        game.set({ status: 'started' }); // Actualiza el estado del juego a 'started'
+        game.save()
         return res.status(200).json({ message: 'Game started successfully' });
     } catch (err) {
         console.error('Error starting the game:', err);
