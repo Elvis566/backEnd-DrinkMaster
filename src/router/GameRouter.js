@@ -8,7 +8,7 @@ router.post('/create', createGame);
 router.delete('/delete/:id', finalyGame);
 router.get('/obtener/:id', getGame);
 router.post('/inico', startGame)
-router.get('consultar/:id', obtenerGame)
+router.get('/consultar/:id', obtenerGame)
 
 
 export const routerGame = router;
