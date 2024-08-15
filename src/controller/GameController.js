@@ -26,6 +26,29 @@ export const createGame = async(req, res)=>{
    }
 }
 
+export const updateGame = async(req, res)=>{
+    try {
+        const id = req.params.id;
+        const {pcardJugada, enitenciaJugada} = req.body
+
+        const encontrado = await GameModel.findByPk(id)
+
+        if(!encontrado){
+        return res.status(401).json({message:'Not found'})
+            
+        }
+
+        encontrado.set({
+            cardJugada: cardJugada,
+            penitenciaJugada: penitenciaJugada
+        })
+
+        encontrado.save();
+    } catch (error) {
+        return res.status(500).json({message:error})
+    }
+}
+
 export const getGame = async(req, res)=>{
     try {
         const id = req.params.id;
@@ -48,6 +71,8 @@ export const getGame = async(req, res)=>{
    
     const dataSala = sala.map(result => ({
         id: result.id,
+        cardJugada: result.cardJugada,
+        penitenciaJugada: result.penitenciaJugada,
         invite_code: result.invite_code,
         status: result.status,
         apodo: result.enlaceUser.apodo,
