@@ -28,9 +28,9 @@ export const savePenitencia = async (req, res)=>{
 export const getPenitenciaPlay = async(req, res)=>{
     try {
     
-        const card_id = req.params.card_id;
+        const id = req.params.id;
         const penitencia = await PenitenciaModel.findAll({
-            where: {card_id:card_id}
+            where: {card_id:id}
         })
         if(penitencia){
            return res.status(401).json({penitencia: penitencia[0]});
