@@ -13,8 +13,8 @@ export const GameModel = sequelize.define("games", {
     allowNull: false
   },
   status: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: true,
+    type: DataTypes.ENUM('waiting', 'started', 'ended'),
+    defaultValue: 'waiting',
     allowNull: false
   },
   

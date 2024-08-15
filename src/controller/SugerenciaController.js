@@ -10,9 +10,9 @@ export const saveSugerencia = async (req, res)=>{
             return res.status(400).json({messge: "not input invalid"})
         }
        
-        const pt = await saveSugerencia.create({
-            descripcion,
-            user_id
+        const pt = await SugerenciaModel.create({
+            descripcion: descripcion,
+            user_id: user_id
         })
         return res
         .status(201)

@@ -96,6 +96,7 @@ export const login = async (req,res)=> {
 export const getUsers = async (req, res) => {
     try {
         const id = req.params.id;
+        const busqueda = req.body.busqueda;
 
         // Obtener los IDs de los amigos del usuario
         const friends = await FriendModel.findAll({
@@ -113,13 +114,23 @@ export const getUsers = async (req, res) => {
             return [friend.user_id, friend.friend_id].filter(friendId => friendId !== id);
         });
 
+        // Configuración del where para la búsqueda
+        let userWhereCondition = {
+            id: {
+                [Op.notIn]: [id, ...friendIds]
+            }
+        };
+
+        if (busqueda) {
+            userWhereCondition = {
+                ...userWhereCondition,
+                apodo: { [Op.like]: `%${busqueda}%` } // Filtra por el apodo del usuario
+            };
+        }
+
         // Obtener los usuarios excluyendo el usuario que hace la petición y sus amigos
         const users = await UserModel.findAll({
-            where: {
-                id: {
-                    [Op.notIn]: [id, ...friendIds]
-                }
-            },
+            where: userWhereCondition,
             include: {
                 model: AvatarModel,
                 as: 'enlaceA',

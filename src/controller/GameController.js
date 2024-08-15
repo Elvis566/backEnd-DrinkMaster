@@ -81,6 +81,24 @@ export const finalyGame = async(req, res)=> {
 
 }
 
+// Iniciar partida
+export const startGame = async (req, res) => {
+    try {
+        const { gameId } = req.body; // Asumiendo que el ID del juego se pasa en el body de la solicitud
+
+        const game = await GameModel.findByPk(gameId);
+        if (!game) {
+            return res.status(404).json({ message: 'Game not found' });
+        }
+
+        await game.update({ status: 'started' }); // Actualiza el estado del juego a 'started'
+        return res.status(200).json({ message: 'Game started successfully' });
+    } catch (err) {
+        console.error('Error starting the game:', err);
+        return res.status(500).json({ message: 'Error starting the game' });
+    }
+};
+
 
 function codigoShare(){
     return crypto.randomBytes(4).toString('hex');
