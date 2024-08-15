@@ -119,7 +119,7 @@ export const update = async(req, res)=> {
         }
 
         jugador.set({
-            score: score
+            score: jugador.score + score
         })
 
         jugador.save();
