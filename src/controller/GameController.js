@@ -99,6 +99,18 @@ export const startGame = async (req, res) => {
     }
 };
 
+export const obtenerGame= async(req, res)=>{
+    try {
+        const id = req.params.id;
+
+    const encontrada =await GameModel.findByPk(id);
+
+    return res.status(200).json({encontrada: encontrada})
+    } catch (error) {
+        res.status(500).json({message: error})
+    }
+}
+
 
 function codigoShare(){
     return crypto.randomBytes(4).toString('hex');

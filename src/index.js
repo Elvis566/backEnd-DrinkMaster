@@ -16,8 +16,6 @@ import { routerFriends } from './router/FriendRouter.js';
 import { routerPlayer } from './router/PlayerRouter.js';
 import { routerSugerencias } from './router/SugerenciaRouter.js';
 
-import {startGame} from './controller/GameController.js'
-
 import path from 'path';
 
 const __dirname = path.resolve();
@@ -57,22 +55,15 @@ const io = new Server(server);
 
 io.on('connection', (socket) => {
   console.log('A user connected');
-
-  socket.on('startGame', async (gameId) => {
-    // Aquí puedes definir la función startGame o llamarla si ya está definida
-    await startGame(gameId);
-    io.emit('gameStarted', gameId); // Notifica a todos los clientes que el juego ha comenzado
-  });
-
    // Evento para manejar mensajes de chat
-   socket.on('chat message', async (message) => {
+   socket.on('chatMessage', async (message) => {
     console.log('Mensaje recibido:', message);
 
     // (Opcional) Guardar el mensaje en la base de datos
     // await saveMessageToDatabase(message);
 
     // Emitir el mensaje a todos los clientes conectados a la misma partida
-    io.emit('chat message', message);
+    io.emit('newMessage', message);
   });
 
   socket.on('disconnect', () => {
